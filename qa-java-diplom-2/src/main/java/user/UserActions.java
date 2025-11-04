@@ -19,11 +19,13 @@ public class UserActions {
     }
 
     @Step("Удаление пользователя")
-    public static Response delete(String accessToken) {
-        return given()
+    public static void delete(String accessToken) {
+        given()
                 .spec(Specification.requestSpecification())
                 .header("Authorization", accessToken)
                 .when()
                 .delete(URIs.USER);
     }
 }
+
+
