@@ -22,6 +22,7 @@ public class UserActions {
     public static void delete(String accessToken) {
         given()
                 .spec(Specification.requestSpecification())
+                .and()
                 .header("Authorization", accessToken)
                 .when()
                 .delete(URIs.USER);

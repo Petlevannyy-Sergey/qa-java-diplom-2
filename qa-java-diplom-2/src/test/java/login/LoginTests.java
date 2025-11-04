@@ -1,5 +1,6 @@
 package login;
 
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.junit.After;
@@ -21,6 +22,7 @@ public class LoginTests {
     }
 
     @Test
+    @DisplayName("Успешная авторизация с валидными данными пользователя")
     public void LoginIsSuccess() {
         // Arrange
         Login login = new Login(user.getEmail(), user.getPassword());
@@ -45,6 +47,7 @@ public class LoginTests {
     }
 
     @Test
+    @DisplayName("Авторизация при использовании несуществующих данных пользователя")
     public void LoginWithIncorrectDataThrowsError() {
         // Arrange
         Login login = new Login(Generators.getEmail(), Generators.getPassword());

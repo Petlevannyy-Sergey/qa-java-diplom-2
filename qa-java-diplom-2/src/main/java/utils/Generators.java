@@ -22,5 +22,9 @@ public class Generators {
     public static String getEmail(){
         return new Faker().internet().emailAddress();
     }
+
+    public static  String getHash(){
+        return new Faker().crypto().md5();
+    }
 }
 
