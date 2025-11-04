@@ -28,8 +28,8 @@ public class LoginTests {
         Login login = new Login(user.getEmail(), user.getPassword());
 
         // Act
-        Response responseCreating = UserActions.create(user);
-        accessToken = responseCreating.then().extract().path("accessToken").toString();
+        Response userResponse = UserActions.create(user);
+        accessToken = userResponse.then().extract().path("accessToken").toString();
 
         // Assert
         Response response = LoginActions.login(login);

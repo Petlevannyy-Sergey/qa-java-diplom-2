@@ -24,7 +24,7 @@ public class Generators {
     }
 
     public static  String getHash(){
-        return new Faker().crypto().md5();
+        return new Faker().crypto().md5().substring(24);
     }
 }
 
