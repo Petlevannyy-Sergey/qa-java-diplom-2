@@ -133,6 +133,7 @@ public class OrderTests {
 
     @After
     public void tearDown() {
-        UserActions.delete(accessToken);
+        if (accessToken != null)
+            UserActions.delete(accessToken);
     }
 }
