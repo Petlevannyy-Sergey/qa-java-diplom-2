@@ -25,3 +25,4 @@
 - Aspectj 1.9.7
 - Gson 2.13.2
 - Rest Assured 5.5.6
+- Javafaker 1.0.2
