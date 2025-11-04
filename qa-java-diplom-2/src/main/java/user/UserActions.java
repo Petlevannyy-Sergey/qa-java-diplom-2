@@ -1,0 +1,29 @@
+package user;
+
+import io.qameta.allure.Step;
+import io.restassured.response.Response;
+import utils.Specification;
+import utils.URIs;
+
+import static io.restassured.RestAssured.given;
+
+public class UserActions {
+    @Step("Создание пользователя")
+    public static Response create(User user) {
+        return given()
+                .spec(Specification.requestSpecification())
+                .and()
+                .body(user)
+                .when()
+                .post(URIs.USER);
+    }
+
+    @Step("Удаление пользователя")
+    public static Response delete(String accessToken) {
+        return given()
+                .spec(Specification.requestSpecification())
+                .header("Authorization", accessToken)
+                .when()
+                .delete(URIs.USER);
+    }
+}
