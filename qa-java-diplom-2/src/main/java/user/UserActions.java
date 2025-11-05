@@ -33,5 +33,3 @@ public class UserActions {
         return response.then().extract().path("accessToken").toString();
     }
 }
-
-
