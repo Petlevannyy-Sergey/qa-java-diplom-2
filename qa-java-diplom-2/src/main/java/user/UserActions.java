@@ -27,6 +27,11 @@ public class UserActions {
                 .when()
                 .delete(URIs.USER);
     }
+
+    @Step("Получение токена доступа из ответа сервера")
+    public static String getAccessToken(Response response) {
+        return response.then().extract().path("accessToken").toString();
+    }
 }
 
 

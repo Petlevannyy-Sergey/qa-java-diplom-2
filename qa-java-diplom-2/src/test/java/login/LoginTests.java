@@ -29,7 +29,7 @@ public class LoginTests {
 
         // Act
         Response userResponse = UserActions.create(user);
-        accessToken = userResponse.then().extract().path("accessToken").toString();
+        accessToken = UserActions.getAccessToken(userResponse);
 
         // Assert
         Response response = LoginActions.login(login);
@@ -57,8 +57,6 @@ public class LoginTests {
 
         // Assert
         response.then().assertThat().statusCode(HttpStatus.SC_UNAUTHORIZED)
-                .body("success", equalTo(false))
-                .and()
                 .body("success", equalTo(false))
                 .and()
                 .body("message", equalTo("email or password are incorrect"));

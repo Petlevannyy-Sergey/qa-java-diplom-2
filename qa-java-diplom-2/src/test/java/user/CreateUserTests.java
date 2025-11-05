@@ -26,7 +26,7 @@ public class CreateUserTests {
 
         // Act
         Response response = UserActions.create(user);
-        accessToken = response.then().extract().path("accessToken").toString();
+        accessToken = UserActions.getAccessToken(response);
 
         // Assert
         response.then().assertThat().statusCode(HttpStatus.SC_OK)
@@ -49,7 +49,7 @@ public class CreateUserTests {
 
         // Act
         Response response = UserActions.create(user);
-        accessToken = response.then().extract().path("accessToken").toString();
+        accessToken = UserActions.getAccessToken(response);
 
         // Assert
         UserActions.create(user)

@@ -25,7 +25,7 @@ public class OrderTests {
     public void setUp() {
         user = Generators.getUser();
         Response response = UserActions.create(user);
-        accessToken = response.then().extract().path("accessToken").toString();
+        accessToken = UserActions.getAccessToken(response);
         allIngredients = OrderActions.getAllIngredients();
         ingredients = allIngredients.subList(0, 10);
     }
