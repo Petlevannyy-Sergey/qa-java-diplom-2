@@ -2,8 +2,8 @@ package order;
 
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
-import utils.Specification;
-import utils.URIs;
+import config.Specification;
+import config.URIs;
 
 import java.util.List;
 
