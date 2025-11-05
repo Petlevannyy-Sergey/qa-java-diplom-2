@@ -7,6 +7,7 @@ import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import shared.Assertions;
 import utils.Generators;
 
 import static org.hamcrest.Matchers.equalTo;
@@ -43,10 +44,9 @@ public class CreateUserParameterizedTest {
         Response response = UserActions.create(user);
 
         // Assert
-        response.then().assertThat().statusCode(HttpStatus.SC_FORBIDDEN)
-                .and()
-                .body("message", equalTo("Email, password and name are required fields"))
-                .and()
-                .body("success", equalTo(false));
+        Assertions.AssertThatRequestThrowsError(
+                response,
+                HttpStatus.SC_FORBIDDEN,
+                "Email, password and name are required fields");
     }
 }

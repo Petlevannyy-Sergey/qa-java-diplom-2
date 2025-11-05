@@ -6,6 +6,7 @@ import org.apache.http.HttpStatus;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import shared.Assertions;
 import user.User;
 import user.UserActions;
 import utils.Generators;
@@ -30,20 +31,10 @@ public class LoginTests {
         // Act
         Response userResponse = UserActions.create(user);
         accessToken = UserActions.getAccessToken(userResponse);
+        Response response = LoginActions.login(login);
 
         // Assert
-        Response response = LoginActions.login(login);
-        response.then().assertThat().statusCode(HttpStatus.SC_OK)
-                .and()
-                .body("success", equalTo(true))
-                .and()
-                .body("user.email", equalTo(user.getEmail()))
-                .and()
-                .body("user.name", equalTo(user.getName()))
-                .and()
-                .body("accessToken", notNullValue())
-                .and()
-                .body("refreshToken", notNullValue());
+        LoginAssertions.AssertThatLoginIsSuccess(response, user);
     }
 
     @Test
@@ -56,10 +47,10 @@ public class LoginTests {
         Response response = LoginActions.login(login);
 
         // Assert
-        response.then().assertThat().statusCode(HttpStatus.SC_UNAUTHORIZED)
-                .body("success", equalTo(false))
-                .and()
-                .body("message", equalTo("email or password are incorrect"));
+        Assertions.AssertThatRequestThrowsError(
+                response,
+                HttpStatus.SC_UNAUTHORIZED,
+                "email or password are incorrect");
     }
 
     @After

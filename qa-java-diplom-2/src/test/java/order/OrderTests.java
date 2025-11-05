@@ -6,6 +6,7 @@ import org.apache.http.HttpStatus;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import shared.Assertions;
 import user.User;
 import user.UserActions;
 import utils.Generators;
@@ -40,14 +41,7 @@ public class OrderTests {
         Response response = OrderActions.createWithoutAuth(order);
 
         // Assert
-        response
-                .then().assertThat().statusCode(HttpStatus.SC_OK)
-                .and()
-                .body("success", equalTo(true))
-                .and()
-                .body("order", notNullValue())
-                .and()
-                .body("order.number", notNullValue());
+        OrderAssertions.AssertThatOrderCreated(response);
     }
 
     @Test
@@ -60,11 +54,10 @@ public class OrderTests {
         Response response = OrderActions.create(accessToken, order);
 
         // Assert
-        response.then().assertThat().statusCode(HttpStatus.SC_BAD_REQUEST)
-                .and()
-                .body("success", equalTo(false))
-                .and()
-                .body("message", equalTo("Ingredient ids must be provided"));
+        Assertions.AssertThatRequestThrowsError(
+                response,
+                HttpStatus.SC_BAD_REQUEST,
+                "Ingredient ids must be provided");
     }
 
     @Test
@@ -103,14 +96,7 @@ public class OrderTests {
         Response response = OrderActions.create(accessToken, order);
 
         // Assert
-        response
-                .then().assertThat().statusCode(HttpStatus.SC_OK)
-                .and()
-                .body("success", equalTo(true))
-                .and()
-                .body("name", notNullValue())
-                .and()
-                .body("order.number", notNullValue());
+        OrderAssertions.AssertThatOrderCreated(response);
     }
 
     @Test
@@ -123,12 +109,10 @@ public class OrderTests {
         Response response = OrderActions.create(accessToken, order);
 
         // Assert
-        response
-                .then().assertThat().statusCode(HttpStatus.SC_BAD_REQUEST)
-                .and()
-                .body("success", equalTo(false))
-                .and()
-                .body("message", equalTo("Ingredient ids must be provided"));
+        Assertions.AssertThatRequestThrowsError(
+                response,
+                HttpStatus.SC_BAD_REQUEST,
+                "Ingredient ids must be provided");
     }
 
     @After

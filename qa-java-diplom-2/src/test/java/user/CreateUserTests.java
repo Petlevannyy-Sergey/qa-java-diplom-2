@@ -6,9 +6,8 @@ import org.apache.http.HttpStatus;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import shared.Assertions;
 import utils.Generators;
-
-import static org.hamcrest.Matchers.*;
 
 public class CreateUserTests {
     User user;
@@ -29,17 +28,7 @@ public class CreateUserTests {
         accessToken = UserActions.getAccessToken(response);
 
         // Assert
-        response.then().assertThat().statusCode(HttpStatus.SC_OK)
-                .and()
-                .body("success", equalTo(true))
-                .and()
-                .body("user.email", equalTo(user.getEmail()))
-                .and()
-                .body("user.name", equalTo(user.getName()))
-                .and()
-                .body("accessToken", notNullValue())
-                .and()
-                .body("refreshToken", notNullValue());
+        UserAssertions.AssertThatUserCreated(response, user);
     }
 
     @Test
@@ -48,16 +37,15 @@ public class CreateUserTests {
         // Arrange
 
         // Act
-        Response response = UserActions.create(user);
-        accessToken = UserActions.getAccessToken(response);
+        Response firstResponse = UserActions.create(user);
+        accessToken = UserActions.getAccessToken(firstResponse);
+        Response secondResponse = UserActions.create(user);
 
         // Assert
-        UserActions.create(user)
-                .then().assertThat().statusCode(HttpStatus.SC_FORBIDDEN)
-                .and()
-                .body("success", equalTo(false))
-                .and()
-                .body("message", equalTo("User already exists"));
+        Assertions.AssertThatRequestThrowsError(
+                secondResponse,
+                HttpStatus.SC_FORBIDDEN,
+                "User already exists");
     }
 
     @After
