@@ -4,14 +4,12 @@ import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
-import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import shared.Assertions;
 import utils.Generators;
 
-import static org.hamcrest.Matchers.equalTo;
 
 @RunWith(Parameterized.class)
 public class CreateUserParameterizedTest {
