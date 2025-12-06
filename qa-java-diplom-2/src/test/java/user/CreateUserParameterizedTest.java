@@ -1,5 +1,6 @@
 package user;
 
+import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
@@ -24,7 +25,7 @@ public class CreateUserParameterizedTest {
         this.name = name;
     }
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name = "Email: {0}, password: {1}, name: {2}")
     public static Object[][] getTestData() {
         return new Object[][]{
                 {"", Generators.getPassword(), Generators.getName()},

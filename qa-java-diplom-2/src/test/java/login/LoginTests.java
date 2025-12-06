@@ -1,5 +1,6 @@
 package login;
 
+import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
@@ -11,19 +12,16 @@ import user.User;
 import user.UserActions;
 import utils.Generators;
 
-import static org.hamcrest.Matchers.*;
-
 public class LoginTests {
     User user;
-    Login login;
     String accessToken;
     Response userResponse;
 
     @Before
     public void setUp() {
         user = Generators.getUser();
-        login = new Login(user.getEmail(), user.getPassword());
         userResponse = UserActions.create(user);
+        accessToken = UserActions.getAccessToken(userResponse);
     }
 
     @Test
@@ -31,9 +29,9 @@ public class LoginTests {
     @DisplayName("Успешная авторизация с валидными данными пользователя")
     public void LoginIsSuccess() {
         // Arrange
+        Login login = new Login(user.getEmail(), user.getPassword());
 
         // Act
-        accessToken = UserActions.getAccessToken(userResponse);
         Response response = LoginActions.login(login);
 
         // Assert
@@ -45,9 +43,10 @@ public class LoginTests {
     @DisplayName("Авторизация при использовании несуществующих данных пользователя")
     public void LoginWithIncorrectPasswordThrowsError() {
         // Arrange
+        Login login = new Login(user.getEmail(), Generators.getPassword());
 
         // Act
-        Response response = LoginActions.login(login.getEmail(), Generators.getPassword());
+        Response response = LoginActions.login(login);
 
         // Assert
         Assertions.AssertThatRequestThrowsError(
@@ -61,9 +60,10 @@ public class LoginTests {
     @DisplayName("Авторизация при использовании несуществующих данных пользователя")
     public void LoginWithIncorrectEmailThrowsError() {
         // Arrange
+        Login login = new Login(Generators.getEmail(), user.getPassword());
 
         // Act
-        Response response = LoginActions.login(Generators.getEmail(), login.getPassword());
+        Response response = LoginActions.login(login);
 
         // Assert
         Assertions.AssertThatRequestThrowsError(
