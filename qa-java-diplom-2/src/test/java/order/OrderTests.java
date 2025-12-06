@@ -32,6 +32,7 @@ public class OrderTests {
     }
 
     @Test
+    @Description("Проверка создания заказа")
     @DisplayName("Создание заказа с ингредиентами авторизированным пользователем")
     public void createOrderWithIngredientsByAuthorizedUserIsSuccess() {
         // Arrange
@@ -45,6 +46,7 @@ public class OrderTests {
     }
 
     @Test
+    @Description("Проверка создания заказа")
     @DisplayName("Создание заказа без ингредиентов авторизированным пользователем")
     public void createOrderWithoutIngredientsByAuthorizedUserThrowsError() {
         // Arrange
@@ -61,6 +63,7 @@ public class OrderTests {
     }
 
     @Test
+    @Description("Проверка создания заказа")
     @DisplayName("Создание заказа авторизированным пользователем с неверным хешем ингредиента")
     public void createOrderWithInvalidHashByAuthorizedUserThrowsError() {
         // Arrange
@@ -74,6 +77,7 @@ public class OrderTests {
     }
 
     @Test
+    @Description("Проверка создания заказа")
     @DisplayName("Создание заказа не авторизированным пользователем с неверным хешем ингредиента")
     public void createOrderWithInvalidHashByUnauthorizedUserThrowsError() {
         // Arrange
@@ -87,6 +91,7 @@ public class OrderTests {
     }
 
     @Test
+    @Description("Проверка создания заказа")
     @DisplayName("Создание заказа с ингредиентами не авторизированным пользователем")
     public void createOrderWithIngredientsByUnauthorizedUserIsSuccess() {
         // Arrange
@@ -100,6 +105,7 @@ public class OrderTests {
     }
 
     @Test
+    @Description("Проверка создания заказа")
     @DisplayName("Создание заказа без ингредиентов не авторизированным пользователем")
     public void createOrderWithoutIngredientsByUnauthorizedUserThrowsError() {
         // Arrange

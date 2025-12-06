@@ -19,6 +19,7 @@ public class CreateUserTests {
     }
 
     @Test
+    @Description("Проверка создания пользователя")
     @DisplayName("Создание пользователя с использованием валидных данных")
     public void createNewUserIsSuccess() {
         // Arrange
@@ -32,6 +33,7 @@ public class CreateUserTests {
     }
 
     @Test
+    @Description("Проверка создания пользователя")
     @DisplayName("Создание двух одинаковых пользователей")
     public void createTwoIdenticalUsersReturnsError() {
         // Arrange

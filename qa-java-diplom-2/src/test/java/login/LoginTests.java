@@ -15,21 +15,24 @@ import static org.hamcrest.Matchers.*;
 
 public class LoginTests {
     User user;
+    Login login;
     String accessToken;
+    Response userResponse;
 
     @Before
     public void setUp() {
         user = Generators.getUser();
+        login = new Login(user.getEmail(), user.getPassword());
+        userResponse = UserActions.create(user);
     }
 
     @Test
+    @Description("Проверка авторизации пользователя")
     @DisplayName("Успешная авторизация с валидными данными пользователя")
     public void LoginIsSuccess() {
         // Arrange
-        Login login = new Login(user.getEmail(), user.getPassword());
 
         // Act
-        Response userResponse = UserActions.create(user);
         accessToken = UserActions.getAccessToken(userResponse);
         Response response = LoginActions.login(login);
 
@@ -38,13 +41,29 @@ public class LoginTests {
     }
 
     @Test
+    @Description("Проверка авторизации пользователя")
     @DisplayName("Авторизация при использовании несуществующих данных пользователя")
-    public void LoginWithIncorrectDataThrowsError() {
+    public void LoginWithIncorrectPasswordThrowsError() {
         // Arrange
-        Login login = new Login(Generators.getEmail(), Generators.getPassword());
 
         // Act
-        Response response = LoginActions.login(login);
+        Response response = LoginActions.login(login.getEmail(), Generators.getPassword());
+
+        // Assert
+        Assertions.AssertThatRequestThrowsError(
+                response,
+                HttpStatus.SC_UNAUTHORIZED,
+                "email or password are incorrect");
+    }
+
+    @Test
+    @Description("Проверка авторизации пользователя")
+    @DisplayName("Авторизация при использовании несуществующих данных пользователя")
+    public void LoginWithIncorrectEmailThrowsError() {
+        // Arrange
+
+        // Act
+        Response response = LoginActions.login(Generators.getEmail(), login.getPassword());
 
         // Assert
         Assertions.AssertThatRequestThrowsError(

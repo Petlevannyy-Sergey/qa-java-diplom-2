@@ -35,6 +35,7 @@ public class CreateUserParameterizedTest {
     }
 
     @Test
+    @Description("Проверка создания пользователя")
     @DisplayName("Создание пользователя c одним не заполненным обязательным полем")
     public void createUserWithInsufficientDataThrowsError() {
         // Arrange
