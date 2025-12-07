@@ -44,7 +44,7 @@ public class CreateUserParameterizedTest {
         Response response = UserActions.create(user);
 
         // Assert
-        Assertions.AssertThatRequestThrowsError(
+        Assertions.assertThatRequestThrowsError(
                 response,
                 HttpStatus.SC_FORBIDDEN,
                 "Email, password and name are required fields");

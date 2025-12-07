@@ -30,7 +30,7 @@ public class CreateUserTests {
         accessToken = UserActions.getAccessToken(response);
 
         // Assert
-        UserAssertions.AssertThatUserCreated(response, user);
+        UserAssertions.assertThatUserCreated(response, user);
     }
 
     @Test
@@ -45,7 +45,7 @@ public class CreateUserTests {
         Response secondResponse = UserActions.create(user);
 
         // Assert
-        Assertions.AssertThatRequestThrowsError(
+        Assertions.assertThatRequestThrowsError(
                 secondResponse,
                 HttpStatus.SC_FORBIDDEN,
                 "User already exists");

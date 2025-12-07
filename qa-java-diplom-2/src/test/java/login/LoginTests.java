@@ -27,7 +27,7 @@ public class LoginTests {
     @Test
     @Description("Проверка авторизации пользователя")
     @DisplayName("Успешная авторизация с валидными данными пользователя")
-    public void LoginIsSuccess() {
+    public void loginIsSuccess() {
         // Arrange
         Login login = new Login(user.getEmail(), user.getPassword());
 
@@ -35,13 +35,13 @@ public class LoginTests {
         Response response = LoginActions.login(login);
 
         // Assert
-        LoginAssertions.AssertThatLoginIsSuccess(response, user);
+        LoginAssertions.assertThatLoginIsSuccess(response, user);
     }
 
     @Test
     @Description("Проверка авторизации пользователя")
     @DisplayName("Авторизация при использовании несуществующих данных пользователя")
-    public void LoginWithIncorrectPasswordThrowsError() {
+    public void loginWithIncorrectPasswordThrowsError() {
         // Arrange
         Login login = new Login(user.getEmail(), Generators.getPassword());
 
@@ -49,7 +49,7 @@ public class LoginTests {
         Response response = LoginActions.login(login);
 
         // Assert
-        Assertions.AssertThatRequestThrowsError(
+        Assertions.assertThatRequestThrowsError(
                 response,
                 HttpStatus.SC_UNAUTHORIZED,
                 "email or password are incorrect");
@@ -58,7 +58,7 @@ public class LoginTests {
     @Test
     @Description("Проверка авторизации пользователя")
     @DisplayName("Авторизация при использовании несуществующих данных пользователя")
-    public void LoginWithIncorrectEmailThrowsError() {
+    public void loginWithIncorrectEmailThrowsError() {
         // Arrange
         Login login = new Login(Generators.getEmail(), user.getPassword());
 
@@ -66,7 +66,7 @@ public class LoginTests {
         Response response = LoginActions.login(login);
 
         // Assert
-        Assertions.AssertThatRequestThrowsError(
+        Assertions.assertThatRequestThrowsError(
                 response,
                 HttpStatus.SC_UNAUTHORIZED,
                 "email or password are incorrect");

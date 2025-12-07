@@ -8,7 +8,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
 public class LoginAssertions {
-    public static void AssertThatLoginIsSuccess(Response response, User user){
+    public static void assertThatLoginIsSuccess(Response response, User user){
         response.then().assertThat().statusCode(HttpStatus.SC_OK)
                 .and()
                 .body("success", equalTo(true))

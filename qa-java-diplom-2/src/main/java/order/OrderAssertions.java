@@ -7,7 +7,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
 public class OrderAssertions {
-    public static void AssertThatOrderCreated(Response response) {
+    public static void assertThatOrderCreated(Response response) {
         response
                 .then().assertThat().statusCode(HttpStatus.SC_OK)
                 .and()

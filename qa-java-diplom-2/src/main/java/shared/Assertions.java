@@ -5,7 +5,7 @@ import io.restassured.response.Response;
 import static org.hamcrest.Matchers.equalTo;
 
 public class Assertions {
-    public static void AssertThatRequestThrowsError(
+    public static void assertThatRequestThrowsError(
             Response response,
             int status,
             String message) {

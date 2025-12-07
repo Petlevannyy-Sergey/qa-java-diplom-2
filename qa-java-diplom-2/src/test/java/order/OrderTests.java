@@ -43,7 +43,7 @@ public class OrderTests {
         Response response = OrderActions.createWithoutAuth(order);
 
         // Assert
-        OrderAssertions.AssertThatOrderCreated(response);
+        OrderAssertions.assertThatOrderCreated(response);
     }
 
     @Test
@@ -57,7 +57,7 @@ public class OrderTests {
         Response response = OrderActions.create(accessToken, order);
 
         // Assert
-        Assertions.AssertThatRequestThrowsError(
+        Assertions.assertThatRequestThrowsError(
                 response,
                 HttpStatus.SC_BAD_REQUEST,
                 "Ingredient ids must be provided");
@@ -102,7 +102,7 @@ public class OrderTests {
         Response response = OrderActions.create(accessToken, order);
 
         // Assert
-        OrderAssertions.AssertThatOrderCreated(response);
+        OrderAssertions.assertThatOrderCreated(response);
     }
 
     @Test
@@ -116,7 +116,7 @@ public class OrderTests {
         Response response = OrderActions.create(accessToken, order);
 
         // Assert
-        Assertions.AssertThatRequestThrowsError(
+        Assertions.assertThatRequestThrowsError(
                 response,
                 HttpStatus.SC_BAD_REQUEST,
                 "Ingredient ids must be provided");
